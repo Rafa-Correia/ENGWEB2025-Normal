@@ -1,0 +1,19 @@
+use eurovisao < -- antes!
+
+1. db.edicoes.countDocuments()
+2. db.edicoes.countDocuments({vencedor: "Ireland"})
+3. db.edicoes.aggregate([
+      { $unwind: "$musicas" },
+      { $group: { intérprete: "$musicas.intérprete" } },
+      { $sort: { intérprete: 1 } }
+    ])
+4. db.edicoes.aggregate([
+    {
+      $project: {
+        _id: 1,
+        anoEdição: 1,
+        numMusicas: { $size: "$musicas" }
+      }
+    },
+    { $sort: { anoEdição: 1 } }
+    ])
